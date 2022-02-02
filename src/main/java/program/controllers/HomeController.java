@@ -24,6 +24,24 @@ public class HomeController {
 
         return animalMapper.AnimalListItems(repository.findAll());
     }
+    @PostMapping("/add")
+    public AnimalItemDto create(AnimalAddItemDto addDto) {
+        Animals animals = animalMapper.AnimalByAddDto(addDto);
+        repository.save(animals);
+        return animalMapper.AnimalToAnimalItemDto(animals);
+    }
 
+    @GetMapping("/item/{id}")
+    public AnimalItemDto getItemAnimal(int id) {
+        Animals animals = animalMapper.GetItemAnimal(repository.findById(id).get());
+        return animalMapper.AnimalToAnimalItemDto(animals);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(int id){
+        Animals animals = animalMapper.GetItemAnimal(repository.findById(id).get());
+        repository.delete(animals);
+        return  ResponseEntity.ok(HttpStatus.OK);
+    }
 
 }

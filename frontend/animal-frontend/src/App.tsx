@@ -1,25 +1,31 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
 import logo from './logo.svg';
 import './App.css';
+import "../node_modules/font-awesome/css/font-awesome.css";
+import DefaultLayout from './components/containers/DefaultLayout';
+import HomePage from './components/Home';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DefaultLayout />}>
+          <Route index element={< HomePage />} />
+          {/* <Route
+            path="/animals/list"
+            element={
+              <Suspense fallback={null}>
+                <AnimalsList />
+              </Suspense>
+            }
+          /> */}
+          {/* <Route path="/animals/add" element={<AddNewAnimal />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
