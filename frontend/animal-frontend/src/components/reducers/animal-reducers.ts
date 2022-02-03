@@ -5,7 +5,6 @@ const initialState: AnimalState = {
 
     animal: [],
     status: ""
-
 };
 
 export const animalReducer = (state = initialState, action: AnimalAction): AnimalState => {
@@ -15,7 +14,7 @@ export const animalReducer = (state = initialState, action: AnimalAction): Anima
             return {
                 ...state,
                 animal: action.payload,
-                status:""
+                status:''
             };
 
         case AnimalActionTypes.ADD_ANIMAL_SUCCESS:

@@ -16,15 +16,15 @@ export interface IAnimalModel {
 export interface AnimalState {
 
     animal: Array<IAnimalModel>
-    status:string|number;
+    status:number|string
    
 }
 
 
 export interface IAddNewAnimal {
+
     name: string;
     owner: string;
-
 }
 
 export interface ISearchAnimalById {

@@ -25,7 +25,7 @@ export const AddAnimals =
     (data: IAddNewAnimal) => async (dispatch: Dispatch<AnimalAction>) => {
         try {
             const response = await http.post<IAnimalModel>("/add", data);
-            console.log(response.data);
+            console.log(response.status);
             dispatch({
                 type: AnimalActionTypes.ADD_ANIMAL_SUCCESS,
                 payloads: response.status

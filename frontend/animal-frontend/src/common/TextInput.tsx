@@ -7,6 +7,7 @@ interface TextInputProps  {
     touched?: boolean,
     error?: string | null,
     type?: "text",
+    value:string,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -16,6 +17,7 @@ const TextInput: FC<TextInputProps> = ({
     touched,
     error = null,
     type = "text",
+    value,
     onChange,  
     }) => {
     return (
@@ -32,6 +34,7 @@ const TextInput: FC<TextInputProps> = ({
                 )}
                 id={field}
                 onChange={onChange}
+                value={value}
             />
             {(touched && error) && <div className="invalid-feedback">{error}</div>}
         </div>
