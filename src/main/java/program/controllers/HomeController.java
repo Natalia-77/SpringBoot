@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/animals")
 public class HomeController {
+
     private final AnimalRepository repository;
     private final AnimalMapper animalMapper;
 
@@ -24,6 +25,7 @@ public class HomeController {
 
         return animalMapper.AnimalListItems(repository.findAll());
     }
+
     @PostMapping("/add")
     public AnimalItemDto create(AnimalAddItemDto addDto) {
         Animals animals = animalMapper.AnimalByAddDto(addDto);

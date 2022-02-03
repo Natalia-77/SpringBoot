@@ -14,8 +14,11 @@ public interface AnimalMapper {
     //для виводу списку тварин у контролері.
     @Mapping(source = "name", target = "name")
     @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "id", target = "id")
     List<AnimalItemDto> AnimalListItems(List<Animals> animal);
 
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "owner", target = "owner")
     Animals AnimalByAddDto(AnimalAddItemDto addItemDto);
 
     AnimalItemDto AnimalToAnimalItemDto (Animals animals);
