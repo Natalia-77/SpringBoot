@@ -4,9 +4,9 @@ import classes from './DefaultLayout.module.css';
 const DefaultLayout = () => {
     return (
         <>
-            <div className={classes.menu}>
+            {/* <div className={classes.menu}> */}
                 <Header />
-            </div>
+            {/* </div> */}
             <div className="container">
                 <Outlet />
             </div>

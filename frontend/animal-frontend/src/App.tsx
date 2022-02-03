@@ -6,6 +6,8 @@ import './App.css';
 import "../node_modules/font-awesome/css/font-awesome.css";
 import DefaultLayout from './components/containers/DefaultLayout';
 import HomePage from './components/Home';
+import AnimalList from './components/AnimalList';
+import AddNewAnimal from './components/AddNewAnimal';
 
 const App: React.FC = () => {
   return (
@@ -13,15 +15,15 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={< HomePage />} />
-          {/* <Route
+          { <Route
             path="/animals/list"
             element={
               <Suspense fallback={null}>
-                <AnimalsList />
+                <AnimalList />
               </Suspense>
             }
-          /> */}
-          {/* <Route path="/animals/add" element={<AddNewAnimal />} /> */}
+          /> }
+          { <Route path="/animals/add" element={<AddNewAnimal />} /> }
         </Route>
       </Routes>
     </BrowserRouter>
