@@ -1,4 +1,4 @@
-import { AnimalAction, AnimalActionTypes, IAddNewAnimal, IAnimalModel } from "../AnimalList/types";
+import { AnimalAction, AnimalActionTypes, IAddNewAnimal, IAnimalModel, ISearchAnimalById } from "../AnimalList/types";
 import { Dispatch } from "react";
 import http from "../../http-common";
 
@@ -38,4 +38,19 @@ export const AddAnimals =
             return Promise.reject();
         }
 
+    }
+
+export const FetchAnimalById =
+    (id: number) => async (dispatch: Dispatch<AnimalAction>) => {
+        try {
+            const response = await http.get<ISearchAnimalById>(`/item/${id}`);
+            console.log(response);
+            dispatch({
+
+            });
+
+
+        } catch (error) {
+
+        }
     }

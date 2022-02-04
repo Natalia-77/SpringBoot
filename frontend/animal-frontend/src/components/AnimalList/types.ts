@@ -2,7 +2,8 @@ export enum AnimalActionTypes {
 
     FETCH_ANIMAL_SUCCESS = "FETCH_ANIMAL_SUCCESS",
     FETCH_ANIMAL_ERROR = "FETCH_ANIMAL_ERROR",
-    ADD_ANIMAL_SUCCESS = "ADD_ANIMAL_SUCCESS"
+    ADD_ANIMAL_SUCCESS = "ADD_ANIMAL_SUCCESS",
+    FETCH_ANIMAL_BY_ID = "FETCH_ANIMAL_BY_ID"
 
 }
 
@@ -17,6 +18,7 @@ export interface AnimalState {
 
     animal: Array<IAnimalModel>
     status:number|string
+    searchedAnimalById:IAnimalModel
    
 }
 
@@ -45,6 +47,12 @@ export interface FetchSuccessAnimalAction {
 export interface AddSuccessAnimalAction {
     type: AnimalActionTypes.ADD_ANIMAL_SUCCESS;
     payloads: string |number;
+}
+
+export interface FetchAnimalITemById{
+    type:AnimalActionTypes.FETCH_ANIMAL_BY_ID;
+    payload :ISearchAnimalById
+
 }
 
 

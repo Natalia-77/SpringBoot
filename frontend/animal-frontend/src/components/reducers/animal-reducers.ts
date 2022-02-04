@@ -4,7 +4,8 @@ import { AnimalState, AnimalAction, AnimalActionTypes } from "../AnimalList/type
 const initialState: AnimalState = {
 
     animal: [],
-    status: ""
+    status: "",
+    searchedAnimalById:
 };
 
 export const animalReducer = (state = initialState, action: AnimalAction): AnimalState => {

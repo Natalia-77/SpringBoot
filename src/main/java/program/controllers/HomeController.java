@@ -27,10 +27,10 @@ public class HomeController {
     }
 
     @PostMapping("/add")
-    public AnimalItemDto create(AnimalAddItemDto addDto) {
+    public ResponseEntity create(@RequestBody AnimalAddItemDto addDto) {
         Animals animals = animalMapper.AnimalByAddDto(addDto);
         repository.save(animals);
-        return animalMapper.AnimalToAnimalItemDto(animals);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/item/{id}")
