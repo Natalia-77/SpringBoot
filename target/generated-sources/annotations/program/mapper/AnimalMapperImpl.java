@@ -10,7 +10,7 @@ import program.entities.Animals;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-02-03T17:37:36+0200",
+    date = "2022-02-05T15:42:33+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 @Component

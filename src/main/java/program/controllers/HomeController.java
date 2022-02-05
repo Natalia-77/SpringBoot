@@ -33,14 +33,14 @@ public class HomeController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/item/{id}")
-    public AnimalItemDto getItemAnimal(int id) {
+    @GetMapping(value = "/item/{id}")
+    public AnimalItemDto getItemAnimal(@PathVariable int id) {
         Animals animals = animalMapper.GetItemAnimal(repository.findById(id).get());
         return animalMapper.AnimalToAnimalItemDto(animals);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(int id){
+    @DeleteMapping(value= "/delete/{id}")
+    public ResponseEntity delete(@PathVariable int id){
         Animals animals = animalMapper.GetItemAnimal(repository.findById(id).get());
         repository.delete(animals);
         return  ResponseEntity.ok(HttpStatus.OK);
