@@ -8,6 +8,8 @@ import DefaultLayout from './components/containers/DefaultLayout';
 import HomePage from './components/Home';
 import AnimalList from './components/AnimalList';
 import AddNewAnimal from './components/AddNewAnimal';
+import AnimalById from './components/AnimalById';
+
 
 const App: React.FC = () => {
   return (
@@ -15,6 +17,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={< HomePage />} />
+
           { <Route
             path="/animals/list"
             element={
@@ -23,7 +26,18 @@ const App: React.FC = () => {
               </Suspense>
             }
           /> }
+
           { <Route path="/animals/add" element={<AddNewAnimal />} /> }
+
+          { <Route
+            path="/animals/item/:id"
+            element={
+              <Suspense fallback={null}>
+                <AnimalById />
+              </Suspense>
+            }
+          /> }
+          
         </Route>
       </Routes>
     </BrowserRouter>

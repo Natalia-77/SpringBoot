@@ -1,19 +1,26 @@
 
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useActions } from "../../hooks/useActions";
+import { Link } from 'react-router-dom';
+
 
 const AnimalList: React.FC = () => {
 
     const { animal } = useTypedSelector((store) => store.animalinstance);
-
-    const { FetchAnimals } = useActions();
+    const { FetchAnimals,DeleteAnimals } = useActions();
 
     useEffect(() => {
 
         FetchAnimals();
 
     }, []);
+
+    const handleDelete = (id:number) => {
+
+         DeleteAnimals(id);       
+      }
+
 
     return (
         <>
@@ -23,6 +30,7 @@ const AnimalList: React.FC = () => {
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Owner</th>
+                        <th scope="col">Options</th>
                     </tr>
                 </thead>
                 {<tbody>
@@ -32,6 +40,13 @@ const AnimalList: React.FC = () => {
                                 <th scope="row">{item.id}</th>
                                 <td>{item.name}</td>
                                 <td>{item.owner}</td>
+                                <td>
+                                <div className="mx-5">         
+                  <Link className="btn btn-info" to={`/animals/item/${item.id}`}>Детальніше</Link>         
+                  
+                  <button className="btn btn-danger ml-2" onClick={() => {handleDelete(item.id);}}>Видалити</button>
+                  </div>
+                </td>
                             </tr>
                         );
                     })}

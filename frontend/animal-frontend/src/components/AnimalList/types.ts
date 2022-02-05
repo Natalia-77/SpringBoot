@@ -3,7 +3,8 @@ export enum AnimalActionTypes {
     FETCH_ANIMAL_SUCCESS = "FETCH_ANIMAL_SUCCESS",
     FETCH_ANIMAL_ERROR = "FETCH_ANIMAL_ERROR",
     ADD_ANIMAL_SUCCESS = "ADD_ANIMAL_SUCCESS",
-    FETCH_ANIMAL_BY_ID = "FETCH_ANIMAL_BY_ID"
+    FETCH_ANIMAL_BY_ID = "FETCH_ANIMAL_BY_ID",
+    DELETE_ANIMAL_BY_ID = "DELETE_ANIMAL_BY_ID"
 
 }
 
@@ -14,11 +15,17 @@ export interface IAnimalModel {
     owner: string
 }
 
+export interface ISearchAnimalByIdModel{
+    id:number
+    name:string
+    owner:string
+}
+
 export interface AnimalState {
 
     animal: Array<IAnimalModel>
     status:number|string
-    searchedAnimalById:IAnimalModel
+    searchedAnimalById:ISearchAnimalByIdModel
    
 }
 
@@ -29,14 +36,14 @@ export interface IAddNewAnimal {
     owner: string;
 }
 
-export interface ISearchAnimalById {
+export interface ISearchItem {
 
     id: number
 }
 
-export interface IFetchErrorResponse {
+export interface IDeleteItem {
 
-    errors: string
+    id: number
 }
 
 export interface FetchSuccessAnimalAction {
@@ -51,11 +58,17 @@ export interface AddSuccessAnimalAction {
 
 export interface FetchAnimalITemById{
     type:AnimalActionTypes.FETCH_ANIMAL_BY_ID;
-    payload :ISearchAnimalById
+    payload :ISearchAnimalByIdModel
 
 }
 
+export interface DeleteAnimalAction {
+    type: AnimalActionTypes.DELETE_ANIMAL_BY_ID;
+    payload: number;
+  }
 
 export type AnimalAction =
     FetchSuccessAnimalAction
-    | AddSuccessAnimalAction;
+    | AddSuccessAnimalAction
+    | FetchAnimalITemById
+    | DeleteAnimalAction;
