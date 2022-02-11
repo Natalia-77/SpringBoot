@@ -22,4 +22,12 @@ public class Animals {
     private String name;
     @Column(name="owner",length = 200,nullable = false)
     private String owner;
+    @Column(name="image",nullable = true,columnDefinition="TEXT")
+    private String urlImage;
+    public Animals(String name,String owner, String urlImage){
+        this.name = name;
+        this.owner = owner;
+        this.urlImage = urlImage;
+    }
+
 }

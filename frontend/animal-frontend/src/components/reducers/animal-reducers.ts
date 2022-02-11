@@ -8,7 +8,8 @@ const initialState: AnimalState = {
     searchedAnimalById: {
         id: 0,
         name: "",
-        owner: ""
+        owner: "",
+        urlImage:""
     }
 };
 
@@ -34,7 +35,8 @@ export const animalReducer = (state = initialState, action: AnimalAction): Anima
                 searchedAnimalById: {
                     id: action.payload.id,
                     name: action.payload.name,
-                    owner: action.payload.owner
+                    owner: action.payload.owner,
+                    urlImage:action.payload.urlImage
                 }
             };
 

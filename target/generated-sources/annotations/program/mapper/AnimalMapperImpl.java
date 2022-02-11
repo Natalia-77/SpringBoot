@@ -10,7 +10,7 @@ import program.entities.Animals;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-02-05T15:42:33+0200",
+    date = "2022-02-10T11:21:52+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 @Component
@@ -40,6 +40,7 @@ public class AnimalMapperImpl implements AnimalMapper {
 
         animals.setName( addItemDto.getName() );
         animals.setOwner( addItemDto.getOwner() );
+        animals.setUrlImage( addItemDto.getUrlImage() );
 
         return animals;
     }
@@ -55,6 +56,7 @@ public class AnimalMapperImpl implements AnimalMapper {
         animalItemDto.setId( animals.getId() );
         animalItemDto.setName( animals.getName() );
         animalItemDto.setOwner( animals.getOwner() );
+        animalItemDto.setUrlImage( animals.getUrlImage() );
 
         return animalItemDto;
     }
@@ -70,6 +72,7 @@ public class AnimalMapperImpl implements AnimalMapper {
         animals.setId( id.getId() );
         animals.setName( id.getName() );
         animals.setOwner( id.getOwner() );
+        animals.setUrlImage( id.getUrlImage() );
 
         return animals;
     }

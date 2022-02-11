@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "font-awesome/css/font-awesome.min.css";
+import 'antd/dist/antd.css';
 
 ReactDOM.render( 
   <Provider store={store}>

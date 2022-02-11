@@ -24,6 +24,7 @@ public class CorsConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedOrigins("*")
+                .allowedHeaders("*")
                 .allowedMethods("*");
     }
 }

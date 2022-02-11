@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
-import logo from './logo.svg';
+import { lazy, Suspense } from "react";
 import './App.css';
 import "../node_modules/font-awesome/css/font-awesome.css";
 import DefaultLayout from './components/containers/DefaultLayout';

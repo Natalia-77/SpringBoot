@@ -12,13 +12,15 @@ export interface IAnimalModel {
 
     id: number,
     name: string,
-    owner: string
+    owner: string,
+    urlImage:string
 }
 
 export interface ISearchAnimalByIdModel{
     id:number
     name:string
     owner:string
+    urlImage:string
 }
 
 export interface AnimalState {
@@ -32,8 +34,10 @@ export interface AnimalState {
 
 export interface IAddNewAnimal {
 
-    name: string;
-    owner: string;
+    name: string
+    owner: string
+    urlImage:string
+   
 }
 
 export interface ISearchItem {

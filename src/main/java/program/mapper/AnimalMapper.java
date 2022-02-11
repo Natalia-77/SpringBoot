@@ -15,10 +15,12 @@ public interface AnimalMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "owner", target = "owner")
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "urlImage", target = "urlImage")
     List<AnimalItemDto> AnimalListItems(List<Animals> animal);
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "owner", target = "owner")
+    @Mapping(source = "urlImage", target = "urlImage")
     Animals AnimalByAddDto(AnimalAddItemDto addItemDto);
 
     AnimalItemDto AnimalToAnimalItemDto (Animals animals);

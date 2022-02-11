@@ -1,3 +1,6 @@
+@import url('~antd/dist/antd.css');
+/* @import '~antd/dist/antd.css'; */
+
 .menu{
     position:fixed;
     width:100%; 
