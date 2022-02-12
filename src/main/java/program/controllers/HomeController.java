@@ -65,16 +65,19 @@ public class HomeController {
 
         Animals animals = animalMapper.AnimalByAddDto(addDto);
         String bases64=animals.getUrlImage();
-        String name = animalService.base64ToImageFile(bases64);
-        String base64ImageString = bases64.replace("data:image/jpeg;base64,", "");//обрізала початок строчки.
-        byte[] decodedBytes = DatatypeConverter.parseBase64Binary(base64ImageString);
-        animals.setUrlImage(name);
-        FileOutputStream fos = new FileOutputStream("./upload/"+name);
-        try {
-            fos.write(decodedBytes);
-        }
-        finally {
-            fos.close();
+        if(!bases64.isEmpty()){
+            String name = animalService.base64ToImageFile(bases64);
+            //String base64ImageString = bases64.replace("data:image/png;base64,", "");//обрізала початок строчки.
+            String base64ImageString = bases64.substring(bases64.indexOf(",")+1, bases64.length());
+            byte[] decodedBytes = DatatypeConverter.parseBase64Binary(base64ImageString);
+            animals.setUrlImage(name);
+            FileOutputStream fos = new FileOutputStream("./upload/"+name);
+            try {
+                fos.write(decodedBytes);
+            }
+            finally {
+                fos.close();
+            }
         }
 
         repository.save(animals);
