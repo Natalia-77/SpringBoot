@@ -1,4 +1,3 @@
-import http from "../../http-common";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useEffect } from "react";
 import { useActions } from "../../hooks/useActions";
