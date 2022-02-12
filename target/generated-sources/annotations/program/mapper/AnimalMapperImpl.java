@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import program.dto.AnimalAddItemDto;
 import program.dto.AnimalItemDto;
 import program.entities.Animals;
+import program.repositories.mapper.AnimalMapper;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",

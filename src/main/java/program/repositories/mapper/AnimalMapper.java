@@ -1,4 +1,4 @@
-package program.mapper;
+package program.repositories.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

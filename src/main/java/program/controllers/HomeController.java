@@ -1,14 +1,13 @@
 package program.controllers;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import program.dto.AnimalAddItemDto;
 import program.dto.AnimalItemDto;
 import program.entities.Animals;
-import program.mapper.AnimalMapper;
+import program.repositories.mapper.AnimalMapper;
 import program.repositories.AnimalRepository;
 import program.service.AnimalService;
 import javax.xml.bind.DatatypeConverter;
@@ -67,7 +66,6 @@ public class HomeController {
         String bases64=animals.getUrlImage();
         if(!bases64.isEmpty()){
             String name = animalService.base64ToImageFile(bases64);
-            //String base64ImageString = bases64.replace("data:image/png;base64,", "");//обрізала початок строчки.
             String base64ImageString = bases64.substring(bases64.indexOf(",")+1, bases64.length());
             byte[] decodedBytes = DatatypeConverter.parseBase64Binary(base64ImageString);
             animals.setUrlImage(name);
