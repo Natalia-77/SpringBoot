@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, useState, useRef } from "react";
+import { FC, InputHTMLAttributes, useState, useRef,LegacyRef } from "react";
 import classNames from 'classnames';
 import { Modal, Button, Row, Col } from 'antd';
 import "cropperjs/dist/cropper.min.css";
@@ -10,8 +10,7 @@ interface ImageInputProps extends InputHTMLAttributes<HTMLInputElement> {
     touched?: boolean | null,
     error?: string | null,
     type: string,
-    refFormik: (field: string, value: any) => void,
-    //refFormik:React.MutableRefObject<HTMLInputElement>,
+    refFormik: (field: string, value: any) => void,   
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -31,31 +30,50 @@ const ImageInput: FC<ImageInputProps> = ({
     const imgRef = useRef<HTMLImageElement>(null);
     const prevRef = useRef<HTMLImageElement>(null);
     const [cropperObj, setCropperObj] = useState<Cropper>();
+
     const OnChangeHandler = async (event: any) => {
 
         const file = (event.target.files as FileList)[0];
-        setCurImage(URL.createObjectURL(file));
+        setCurImage(URL.createObjectURL(file));    
 
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onloadend = function () {
             console.log('RESULT', fileReader.result);
             refFormik(field, fileReader.result);
-            setModalImage(fileReader.result as string);
+            setModalImage(fileReader.result as string);            
         }
         await setVisible(true);
+        
     }
 
     const cropShow = async () => {
         setButtonVisible(false);//ми в режимі обрізки фото,тому ця кнопка ховається
         let cropper = new Cropper(imgRef.current as HTMLImageElement, {
-            aspectRatio: 16 / 9,
+            aspectRatio: 4 / 3,
             viewMode: 1,
-            preview: prevRef.current as HTMLImageElement,
+            preview: prevRef.current as HTMLImageElement ,
             background: true
         });
-
+        cropper?.replace(modalImage);
+        setCropperObj(cropper);
+        
     };
+
+    const handleCropped=()=>{
+        const base64=cropperObj?.getCroppedCanvas().toDataURL() as string;
+        console.log("base64", base64);       
+        if(base64)
+        {
+            setModalImage(base64);
+            refFormik("urlImage", base64);
+        }
+        else{
+            refFormik("urlImage",modalImage);   
+        }
+             
+        setVisible(false);
+    }
 
     return (
         <div className="mb-3 ">
@@ -82,29 +100,28 @@ const ImageInput: FC<ImageInputProps> = ({
                 title="Modal"
                 centered
                 visible={visible}
-                //onOk={handleCropped}
+                onOk={handleCropped}
                 onCancel={() => setVisible(false)}
                 width={1000}
                 maskClosable={false}
-            > <Row gutter={[8, 8]}>
+            >
+                 <Row gutter={[8, 8]}>
                     <Col md={18} xs={24}>
                         <div>
                             <img src={modalImage}
                                 ref={imgRef}
-                                width="100%" />
+                                width="70%" />
                         </div>
                     </Col>
-                    <Col md={6} xs={24}>
-                        <div
-                            ref={prevRef}
-                            style={{
-                                height: "150px",
-                                border: "5px solid silver",
 
+                    <Col md={6} xs={24}>
+                        { <div                                          
+                            ref={prevRef}                            
+                            style={{
+                                height: "150px",                               
                                 overflow: "hidden"
                             }}>
-
-                        </div>
+                        </div> }
                     </Col>
                 </Row>
                 {buttonVisible ?

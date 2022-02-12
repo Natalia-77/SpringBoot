@@ -20,9 +20,7 @@ const AddNewAnimal: React.FC = () => {
     const navigator = useNavigate();
     const { AddAnimals } = useActions();
     const { status } = useTypedSelector((store) => store.animalinstance);
-    console.log("Status:", status);
-    //const formikImage =React.useRef() as React.MutableRefObject<HTMLInputElement>;    
-    const imgRef=React.useRef<HTMLImageElement>(null);    
+    //console.log("Status:", status);          
 
     const onSubmit = (values: IAddNewAnimal, helpers: FormikHelpers<IAddNewAnimal>) => {
         console.log("Values",values);
@@ -36,7 +34,7 @@ const AddNewAnimal: React.FC = () => {
 
     useEffect(() => {
         if (status == 200) {
-            console.log("useEffect done!");            
+            //console.log("useEffect done!");            
             navigator("/");
         }
 
