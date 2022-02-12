@@ -65,7 +65,7 @@ const ImageInput: FC<ImageInputProps> = ({
         console.log("base64", base64);       
         if(base64)
         {
-            setModalImage(base64);
+            setCurImage(base64);
             refFormik("urlImage", base64);
         }
         else{
