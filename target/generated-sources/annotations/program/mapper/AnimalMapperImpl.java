@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 import program.dto.AnimalAddItemDto;
 import program.dto.AnimalItemDto;
 import program.entities.Animals;
-import program.repositories.mapper.AnimalMapper;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-02-10T11:21:52+0200",
+    date = "2022-02-13T10:01:43+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 @Component
