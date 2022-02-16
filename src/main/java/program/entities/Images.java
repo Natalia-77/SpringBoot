@@ -18,11 +18,15 @@ public class Images {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name",nullable = true,columnDefinition="TEXT")
+    @Column(name="name",columnDefinition="TEXT")
     private String urlImage;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="book_id")
-    private Book books=new Book();
+    private Book bookss=new Book();
+
+    public Images(String urlImage){
+        this.urlImage = urlImage;
+    }
 
 }
