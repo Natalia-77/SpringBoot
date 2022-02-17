@@ -1,35 +1,30 @@
 package program.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import program.dto.AnimalAddItemDto;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import program.dto.BookAddItemDto;
 import program.dto.BookItemDto;
 import program.dto.ImageItemDto;
-import program.entities.Animals;
 import program.entities.Book;
 import program.entities.Images;
-import program.mapper.AnimalMapper;
 import program.mapper.BookMapper;
-import program.repositories.AnimalRepository;
 import program.repositories.BookRepository;
-import program.repositories.ImageRepository;
-import program.service.AnimalService;
+import program.storage.FileInfo;
 import program.storage.StorageService;
 
-import javax.xml.bind.DatatypeConverter;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,16 +34,62 @@ public class BookController {
     private final StorageService storageService;
     private final BookRepository repository;
     private final BookMapper bookMapper;
-    private final AnimalService animalService;
 
+    @GetMapping("/listbooks")
+    public List<BookItemDto> list(){
+        List<BookItemDto> bookItemDtos=bookMapper.BookListItems(repository.findAll());
 
+        for (BookItemDto bookDto:bookItemDtos) {
 
+               List<ImageItemDto> filenames= bookDto.getUrlImage();
+                for (ImageItemDto image:filenames) {
+                    try{
+                        String base64 = image.getUrlImage();
+                        InputStream iSteamReader = new FileInputStream("./upload-images/"+base64);
+                        byte[] imageBytes = IOUtils.toByteArray(iSteamReader);
+                        base64 = Base64.getEncoder().encodeToString(imageBytes);
+                        image.setUrlImage("data:image/jpeg;base64,"+ base64);
 
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+        }
+
+        return bookItemDtos;
+    }
+
+    //отримати всі зображення.
+    @GetMapping("/files")
+    public ResponseEntity<List<FileInfo>> getListFiles() {
+        List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+            String filename = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder
+                    .fromMethodName(BookController.class, "getFile", path.getFileName().toString()).build().toString();
+
+            return new FileInfo(filename, url);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+    }
+
+    //отримати зображення по імені файлу
+    @GetMapping("/image/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) throws Exception {
+
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .header(HttpHeaders.CONTENT_DISPOSITION,"filename=\""+file.getFilename()+"\"")
+                .body(file);
+    }
+
+    //додати нову книжку в базу з множиною фото.
     @PostMapping( "/addbook")
     public ResponseEntity create(@RequestBody BookAddItemDto bookItemDto) throws IOException {
 
         Book books = bookMapper.BookDtoToBook(bookItemDto);
-        List<Images> imagesList= new ArrayList<>();
 
         for (Images image1:books.getUrlImage()
              ) {
@@ -56,20 +97,10 @@ public class BookController {
             String bases64 = image1.getUrlImage();
 
             if (!bases64.isEmpty()) {
-                String name = animalService.base64ToImageFile(bases64);
+                String name = storageService.store(bases64);
                 image1.setUrlImage(name);
                 image1.setBookss(books);
 
-                String base64ImageString = bases64.substring(bases64.indexOf(",") + 1, bases64.length());
-                byte[] decodedBytes = DatatypeConverter.parseBase64Binary(base64ImageString);
-                imagesList.add(new Images(name));
-
-                FileOutputStream fos = new FileOutputStream("./upload/" + name);
-                try {
-                    fos.write(decodedBytes);
-                } finally {
-                    fos.close();
-                }
             }
         }
 
