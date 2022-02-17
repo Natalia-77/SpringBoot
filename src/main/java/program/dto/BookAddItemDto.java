@@ -10,5 +10,5 @@ import java.util.List;
 public class BookAddItemDto {
     private String name;
     private String description;
-    private List<ImageItemDto> urlImage;
+    private List<ImageAddItemDto> urlImage;
 }
