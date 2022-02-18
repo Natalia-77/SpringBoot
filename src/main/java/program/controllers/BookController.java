@@ -44,10 +44,12 @@ public class BookController {
                List<ImageItemDto> filenames= bookDto.getUrlImage();
                 for (ImageItemDto image:filenames) {
                     try{
-                        String base64 = image.getUrlImage();
-                        InputStream iSteamReader = new FileInputStream("./upload-images/"+base64);
-                        byte[] imageBytes = IOUtils.toByteArray(iSteamReader);
-                        base64 = Base64.getEncoder().encodeToString(imageBytes);
+
+                        String filename = image.getUrlImage();
+                        String base64 = storageService.loadfile(filename);
+//                        InputStream iSteamReader = new FileInputStream("./upload-images/"+filename);
+//                        byte[] imageBytes = IOUtils.toByteArray(iSteamReader);
+//                        filename = Base64.getEncoder().encodeToString(imageBytes);
                         image.setUrlImage("data:image/jpeg;base64,"+ base64);
 
                     }catch(Exception e){

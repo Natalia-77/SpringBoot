@@ -1,5 +1,6 @@
 package program.storage;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -10,8 +11,7 @@ import program.entities.Images;
 import program.service.AnimalService;
 
 import javax.xml.bind.DatatypeConverter;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -80,6 +80,23 @@ public class FileSystemStorageService implements StorageService {
             return name;
         } catch (IOException e) {
             throw new StorageException("Failed to store file ", e);
+        }
+
+    }
+    @Override
+    public String loadfile(String filename) throws IOException {
+        try{
+            if(filename.isEmpty()){
+                throw  new StorageException("Empty file name ");
+            }
+            InputStream iSteamReader = new FileInputStream("./upload-images/"+filename);
+            byte[] imageBytes = IOUtils.toByteArray(iSteamReader);
+            filename = Base64.getEncoder().encodeToString(imageBytes);
+
+            return filename;
+        }
+        catch(IOException e){
+            throw new StorageException("Failed to load file ", e);
         }
 
     }
