@@ -27,10 +27,8 @@ export interface AnimalState {
 
     animal: Array<IAnimalModel>
     status:number|string
-    searchedAnimalById:ISearchAnimalByIdModel
-   
+    searchedAnimalById:ISearchAnimalByIdModel   
 }
-
 
 export interface IAddNewAnimal {
 
@@ -69,7 +67,7 @@ export interface FetchAnimalITemById{
 export interface DeleteAnimalAction {
     type: AnimalActionTypes.DELETE_ANIMAL_BY_ID;
     payload: number;
-  }
+}
 
 export type AnimalAction =
     FetchSuccessAnimalAction

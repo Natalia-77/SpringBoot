@@ -4,7 +4,7 @@ import { Modal, Button, Row, Col } from 'antd';
 import "cropperjs/dist/cropper.min.css";
 import Cropper from "cropperjs";
 
-interface ImageInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface ImageInputMultiProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string,
     field: string,
     touched?: boolean | null,
@@ -14,14 +14,14 @@ interface ImageInputProps extends InputHTMLAttributes<HTMLInputElement> {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-const ImageInput: FC<ImageInputProps> = ({
+const ImageInput: FC<ImageInputMultiProps> = ({
     label,
     field,
     onChange,
     touched = null,
     error = null,
     refFormik,
-    type = "text" }: ImageInputProps) => {
+    type = "text" }: ImageInputMultiProps) => {
 
     const [curImage, setCurImage] = useState("https://image.freepik.com/free-vector/photo-frame-icon-empty-photo-blank-vector-on-isolated-transparent-background-eps-10_399089-1290.jpg");
     const [visible, setVisible] = useState(false);

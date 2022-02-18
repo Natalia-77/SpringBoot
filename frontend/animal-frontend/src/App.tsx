@@ -8,6 +8,7 @@ import HomePage from './components/Home';
 import AnimalList from './components/AnimalList';
 import AddNewAnimal from './components/AddNewAnimal';
 import AnimalById from './components/AnimalById';
+import BookList from './components/AddMultiImagesBook/BookList';
 
 
 const App: React.FC = () => {
@@ -22,6 +23,15 @@ const App: React.FC = () => {
             element={
               <Suspense fallback={null}>
                 <AnimalList />
+              </Suspense>
+            }
+          /> }
+
+          { <Route
+            path="/books/listbooks"
+            element={
+              <Suspense fallback={null}>
+                <BookList />
               </Suspense>
             }
           /> }

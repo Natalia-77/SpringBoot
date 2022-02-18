@@ -20,7 +20,13 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="/animals/add">Додати тваринку</a>
-                        </li>                       
+                        </li>     
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/books/listbooks">Список книг</a>
+                        </li>  
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/books/addbook">Додати книгу </a>
+                        </li>           
                     </ul>
                 </div>
             </div>
