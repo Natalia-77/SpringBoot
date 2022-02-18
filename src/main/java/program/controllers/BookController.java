@@ -18,7 +18,6 @@ import program.mapper.BookMapper;
 import program.repositories.BookRepository;
 import program.storage.FileInfo;
 import program.storage.StorageService;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +43,6 @@ public class BookController {
                List<ImageItemDto> filenames= bookDto.getUrlImage();
                 for (ImageItemDto image:filenames) {
                     try{
-
                         String filename = image.getUrlImage();
                         String base64 = storageService.loadfile(filename);
 //                        InputStream iSteamReader = new FileInputStream("./upload-images/"+filename);
