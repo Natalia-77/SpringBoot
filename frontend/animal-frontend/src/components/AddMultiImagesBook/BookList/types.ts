@@ -38,7 +38,7 @@ export interface IAddBook {
 
     name: string
     description: string
-    urlImage?:Array<IAddImage>
+    images?:Array<string>
    
 }
 

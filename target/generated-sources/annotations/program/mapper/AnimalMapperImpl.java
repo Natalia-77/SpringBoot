@@ -10,8 +10,8 @@ import program.entities.Animals;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-02-13T10:01:43+0200",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
+    date = "2022-02-20T12:31:21+0200",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_211 (Oracle Corporation)"
 )
 @Component
 public class AnimalMapperImpl implements AnimalMapper {
