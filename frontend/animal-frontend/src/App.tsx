@@ -9,6 +9,7 @@ import AnimalList from './components/AnimalList';
 import AddNewAnimal from './components/AddNewAnimal';
 import AnimalById from './components/AnimalById';
 import BookList from './components/AddMultiImagesBook/BookList';
+import AddNewBook from './components/AddMultiImagesBook/AddNewBook';
 
 
 const App: React.FC = () => {
@@ -37,7 +38,7 @@ const App: React.FC = () => {
           /> }
 
           { <Route path="/animals/add" element={<AddNewAnimal />} /> }
-
+          { <Route path="/books/addbook" element={<AddNewBook />} /> }
           { <Route
             path="/animals/item/:id"
             element={

@@ -2,7 +2,8 @@ import {
     BookAction,
     IBookModel,
     BooksActionTypes,
-    IFetchBooksErrorResponse
+    IFetchBooksErrorResponse,
+    IAddBook
 } from "../AddMultiImagesBook/BookList/types";
 import { Dispatch } from "react";
 import http from "../../books-http-common";
@@ -37,3 +38,33 @@ export const fetchbooks = () => async (dispatch: Dispatch<BookAction>) => {
 
     }
 }
+
+export const addbooks =
+    (data: IAddBook) => async (dispatch: Dispatch<BookAction>) => {
+        try {
+            const response = await http.post<IBookModel>("/addbook",data
+            //  {
+            //     name:data.name,
+            //     description: data.description,
+            //     urlImage:                    
+                       
+            //     data.urlImage?.map((item)=>{ 
+            //        return{item }         
+            //           })
+           
+            //  }
+        );
+            console.log(response.status);
+            dispatch({
+                type:BooksActionTypes.ADD_BOOK_SUCCESS,
+                payloads: response.status
+            });
+
+            return Promise.resolve();
+
+        } catch (error) {
+            console.log("Error add new book:", error);
+            return Promise.reject();
+        }
+
+    }

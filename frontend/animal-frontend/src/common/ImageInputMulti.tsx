@@ -10,7 +10,8 @@ interface ImageInputMultiProps extends InputHTMLAttributes<HTMLInputElement> {
     touched?: boolean | null,
     error?: string | null,
     type: string,
-    refFormik: (field: string, value: any) => void,   
+    uploadImageHandler: (imageBase64: string) => any;
+   // refFormik: (field: string, value: any) => void,   
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -20,7 +21,8 @@ const ImageInput: FC<ImageInputMultiProps> = ({
     onChange,
     touched = null,
     error = null,
-    refFormik,
+    uploadImageHandler,
+    //refFormik,
     type = "text" }: ImageInputMultiProps) => {
 
     const [curImage, setCurImage] = useState("https://image.freepik.com/free-vector/photo-frame-icon-empty-photo-blank-vector-on-isolated-transparent-background-eps-10_399089-1290.jpg");
@@ -40,7 +42,7 @@ const ImageInput: FC<ImageInputMultiProps> = ({
         fileReader.readAsDataURL(file);
         fileReader.onloadend = function () {
             console.log('RESULT', fileReader.result);
-            refFormik(field, fileReader.result);
+           // refFormik(field, fileReader.result);
             setModalImage(fileReader.result as string);            
         }
         await setVisible(true);
@@ -57,19 +59,22 @@ const ImageInput: FC<ImageInputMultiProps> = ({
         });
         cropper?.replace(modalImage);
         setCropperObj(cropper);
+        console.log("Cropper",cropper);
         
     };
 
-    const handleCropped=()=>{
+    const handleCropped=async()=>{
         const base64=cropperObj?.getCroppedCanvas().toDataURL() as string;
         console.log("base64", base64);       
         if(base64)
         {
             setCurImage(base64);
-            refFormik("urlImage", base64);
+         await uploadImageHandler(base64);
+            //refFormik("urlImage", base64);
         }
         else{
-            refFormik("urlImage",modalImage);   
+           // refFormik("urlImage",modalImage);  
+           await uploadImageHandler(modalImage);
         }
              
         setVisible(false);

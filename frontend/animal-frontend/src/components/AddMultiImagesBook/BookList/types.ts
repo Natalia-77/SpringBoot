@@ -29,6 +29,7 @@ export interface BookState {
 }
  export interface IAddImage{
 
+    //id:number
     urlImage:string
 
  }

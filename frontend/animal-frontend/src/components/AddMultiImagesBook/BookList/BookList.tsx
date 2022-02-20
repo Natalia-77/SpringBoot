@@ -13,7 +13,6 @@ const BookList: React.FC = () => {
 
     }, []);
 
-
     return (
         <>
             {<table className=" table table-bordered mt-5" style={{ borderColor: '#00008B' }}>
@@ -29,7 +28,7 @@ const BookList: React.FC = () => {
                     {book.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <th scope="row">{item.id}</th>
+                                { <th scope="row">{item.id}</th> }
                                 <td>{item.name}</td>
                                 <td>{item.description}</td>
                                 <td>

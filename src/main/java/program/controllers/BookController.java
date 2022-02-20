@@ -91,8 +91,7 @@ public class BookController {
 
         Book books = bookMapper.BookDtoToBook(bookItemDto);
 
-        for (Images image1:books.getUrlImage()
-             ) {
+        for (Images image1:books.getUrlImage()) {
 
             String bases64 = image1.getUrlImage();
 
