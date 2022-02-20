@@ -58,13 +58,7 @@ const AddNewBook: React.FC = () => {
 
     const addImageHandler = (imageBase64:string) =>  {
         console.log("base64",imageBase64)
-        setCropImages((prevState) => 
-          prevState.map((item) => {              
-            return {
-                ...item,imageBase64
-            } ;
-          }),
-        );
+        setCropImages());
       };
 
     const { errors, touched, handleChange, values, setFieldValue } = formik;
