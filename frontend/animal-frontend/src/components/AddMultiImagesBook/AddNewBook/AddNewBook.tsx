@@ -66,8 +66,7 @@ const AddNewBook: React.FC = () => {
     return (
         <>
             <div className="row">
-                <h1 className="text-center">Додати нову книжку</h1>
-               
+                <h1 className="text-center">Додати нову книжку</h1>              
 
 
                 <form className="col-4" onSubmit={(e) => formik.handleSubmit(e)}>
