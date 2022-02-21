@@ -42,18 +42,7 @@ export const fetchbooks = () => async (dispatch: Dispatch<BookAction>) => {
 export const addbooks =
     (data: IAddBook) => async (dispatch: Dispatch<BookAction>) => {
         try {
-            const response = await http.post<IBookModel>("/addbook",data
-            //  {
-            //     name:data.name,
-            //     description: data.description,
-            //     urlImage:                    
-                       
-            //     data.urlImage?.map((item)=>{ 
-            //        return{item }         
-            //           })
-           
-            //  }
-        );
+            const response = await http.post<IBookModel>("/addbook",data );
             console.log(response.status);
             dispatch({
                 type:BooksActionTypes.ADD_BOOK_SUCCESS,
