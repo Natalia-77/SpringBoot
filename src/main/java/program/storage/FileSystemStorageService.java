@@ -64,19 +64,24 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public String store(String bases64) {
         try {
+            //в цей метод я написала те,що в мене було раніше по перетворенню файла в контролері...
             if (bases64.isEmpty()) {
                 throw new StorageException("Failed to store empty base64 ");
             }
+            //обрізаю по першу кому атрибути бейс 64...
             String base64ImageString = bases64.substring(bases64.indexOf(",") + 1, bases64.length());
+            //записую в масив байтів...
             byte[] decodedBytes = DatatypeConverter.parseBase64Binary(base64ImageString);
+            //формую рандомне ім"я файлу з окремого методу...
             String name = animalService.base64ToImageFile(bases64);
-
+            //записую в папку під рандомним ім"ям сформований файл...
             FileOutputStream fos = new FileOutputStream("./upload-images/" + name);
             try {
                 fos.write(decodedBytes);
             } finally {
                 fos.close();
             }
+            //повертаю ім"я сформованого вже записаного файлу...
             return name;
         } catch (IOException e) {
             throw new StorageException("Failed to store file ", e);
@@ -89,13 +94,16 @@ public class FileSystemStorageService implements StorageService {
             if(filename.isEmpty()){
                 throw  new StorageException("Empty file name ");
             }
+            //якщо ім"я файлу вказане ,то зчитуємо його за вказаним розташуванням папки з фото.
             InputStream iSteamReader = new FileInputStream("./upload-images/"+filename);
+            //отримали масив байтів.
             byte[] imageBytes = IOUtils.toByteArray(iSteamReader);
+            //отримали бейс 64...
             filename = Base64.getEncoder().encodeToString(imageBytes);
-
             return filename;
         }
         catch(IOException e){
+            //якщо помилка завантаження файла....
             throw new StorageException("Failed to load file ", e);
         }
 
@@ -126,8 +134,10 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public void init() {
         try {
+            //якщо немає такої створеної папки...
             if(!Files.exists(rootLocation))
             {
+                //створили...
                 Files.createDirectory(rootLocation);
             }
         } catch (IOException e) {

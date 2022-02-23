@@ -55,9 +55,6 @@ public class BookController {
                     try{
                         String filename = image.getUrlImage();
                         String base64 = storageService.loadfile(filename);
-//                        InputStream iSteamReader = new FileInputStream("./upload-images/"+filename);
-//                        byte[] imageBytes = IOUtils.toByteArray(iSteamReader);
-//                        filename = Base64.getEncoder().encodeToString(imageBytes);
                         image.setUrlImage("data:image/jpeg;base64,"+ base64);
 
                     }catch(Exception e){
@@ -71,16 +68,19 @@ public class BookController {
 
     @PostMapping("/upload")
     public String upload(@RequestBody UploadImageDto dto) {
+        //з фронтенда(в модельку) потрапляє бейс64,перетворюємо і записуємо в папку з фото,повертаємо назву отриманого файла.
         String imageName = storageService.store(dto.getBase64());
         try {
+            //створюємо нове фото...
             Images image = new Images(imageName);
             //image.setUrlImage(imageName);
+            //зберегли...
             imageRepository.save(image);
         } catch(Exception ex)
         {
             System.out.println("Error "+ ex.getMessage());
         }
-
+        //повертаємо назву фото...
         return imageName;
     }
 

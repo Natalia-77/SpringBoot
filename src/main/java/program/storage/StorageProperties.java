@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 public class StorageProperties {
 
+    //папка,в яку зберігатимуться фото в проекті.
     private String location = "upload-images";
 
 }
